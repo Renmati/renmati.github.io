@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -14,22 +13,48 @@ body {
   color: white;
 }
 
-/* 🎬 VIDEO FONDO */
+/* 💀 GLITCH */
+body.glitch {
+  animation: glitchScreen 0.2s infinite;
+}
+
+@keyframes glitchScreen {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+/* 🎬 VIDEO */
 .video-box {
   position: fixed;
   right: 20px;
   bottom: 20px;
   width: 320px;
   z-index: 2;
+
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  animation: videoAppear 1.5s forwards;
+}
+
+@keyframes videoAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .video-box video {
   width: 100%;
   border-radius: 15px;
   box-shadow: 0 0 20px #00ff88;
+  transition: 0.2s;
 }
 
-/* 🌫️ PARTÍCULAS */
+/* 🌫️ PARTICULAS */
 canvas {
   position: fixed;
   top: 0;
@@ -44,24 +69,6 @@ canvas {
   text-align: center;
 }
 
-/* 🎵 BOTÓN */
-#musicBtn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: black;
-  color: #00ff88;
-  border: 1px solid #00ff88;
-  padding: 10px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.video-box video:hover {
-  transform: scale(1.05);
-  transition: 0.3s;
-
-}
 /* PERFIL */
 .profile {
   width: 170px;
@@ -151,23 +158,16 @@ iframe {
 <body>
 
 <!-- 🎬 VIDEO -->
-
 <div class="video-box">
-  <video id="bgVideo" autoplay loop muted playsinline controls>
+  <video id="bgVideo" autoplay loop muted playsinline>
     <source src="Chubby Mosh - Emblazone Corpse.mp4" type="video/mp4">
   </video>
 </div>
 
-<!-- 🌫️ PARTÍCULAS -->
-
+<!-- 🌫️ PARTICULAS -->
 <canvas id="bg"></canvas>
 
-<!-- 🎵 BOTÓN -->
-
-<button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
-
 <!-- FOTO -->
-
 <div style="text-align:center;">
   <img src="-4otihf.jpg" class="profile">
 </div>
@@ -176,29 +176,26 @@ iframe {
   <div class="card">
     <h1>👋 RENMATI</h1>
 
+    <p>🎮 Gamer | 💻 Aprendiendo programación</p>
 
-<p>🎮 Gamer | 💻 Aprendiendo programación</p>
+    <div class="badges">
+      <img src="https://img.shields.io/badge/YouTube-Comenzando-red?logo=youtube">
+      <img src="https://img.shields.io/badge/Minecraft-Player-green?logo=minecraft">
+      <img src="https://img.shields.io/badge/Futuro-Programador-blue?logo=python">
+    </div>
 
-<div class="badges">
-  <img src="https://img.shields.io/badge/YouTube-Comenzando-red?logo=youtube">
-  <img src="https://img.shields.io/badge/Minecraft-Player-green?logo=minecraft">
-  <img src="https://img.shields.io/badge/Futuro-Programador-blue?logo=python">
-</div>
+    <br>
 
-<br>
-
-<img src="https://img.shields.io/badge/Futuro-Dev-black?logo=github">
-
-
+    <img src="https://img.shields.io/badge/Futuro-Dev-black?logo=github">
   </div>
 </div>
 
 <div class="section">
   <h2>🚀 Sobre mí</h2>
   <p class="bio">
-   Soy Renmati, un creador en proceso que busca forjar su propio camino. Mi
-    objetivo es convertirme en desarrolladora profesional y crecer como creador
-      de contenido, desarrollando proyectos únicos y dejando mi huella..
+   Soy Renmati, un creador en proceso que busca forjar su propio camino.
+   Mi objetivo es convertirme en desarrollador profesional y crecer como creador
+   de contenido, desarrollando proyectos únicos y dejando mi huella.
   </p>
 </div>
 
@@ -211,23 +208,20 @@ iframe {
 </div>
 
 <div class="section">
-  <h2>🌐 Conoceme</h2>
+  <h2>✨ Conóceme</h2>
 
   <div style="display:flex; justify-content:center; gap:25px;">
     <a href="https://www.instagram.com/renmati_rp/" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="60">
     </a>
 
+    <a href="https://discord.com/users/1074170673645223936" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
+    </a>
 
-<a href="https://discord.com/users/1074170673645223936" target="_blank">
-  <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
-</a>
-
-<a href="https://es.namemc.com/profile/renmati.1" target="_blank">
-  <img src="https://s.namemc.com/img/favicon-30.png" width="60">
-</a>
-
-
+    <a href="https://es.namemc.com/profile/renmati.1" target="_blank">
+      <img src="https://s.namemc.com/img/favicon-30.png" width="60">
+    </a>
   </div>
 
   <div style="margin-top:20px;">
@@ -236,13 +230,43 @@ iframe {
 </div>
 
 <script>
-// 🎵 FADE MUSIC
+// 🎵 AUDIO + REACTIVO
 let video = document.getElementById("bgVideo");
 let volume = 0;
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const source = audioCtx.createMediaElementSource(video);
+const analyser = audioCtx.createAnalyser();
+
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
+
+analyser.fftSize = 64;
+const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+function audioReact() {
+  analyser.getByteFrequencyData(dataArray);
+
+  let avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+
+  let scale = 1 + (avg / 200);
+  video.style.transform = `scale(${scale})`;
+
+  // 💀 glitch con música
+  if (avg > 120) {
+    document.body.classList.add("glitch");
+    setTimeout(() => {
+      document.body.classList.remove("glitch");
+    }, 150);
+  }
+
+  requestAnimationFrame(audioReact);
+}
 
 document.addEventListener("click", () => {
   video.muted = false;
   video.volume = 0;
+  audioCtx.resume();
 
   let fade = setInterval(() => {
     if (volume < 0.5) {
@@ -252,17 +276,19 @@ document.addEventListener("click", () => {
       clearInterval(fade);
     }
   }, 200);
+
+  audioReact();
 }, { once: true });
 
-function toggleMusic() {
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
-}
+// 💀 glitch random
+setInterval(() => {
+  document.body.classList.add("glitch");
+  setTimeout(() => {
+    document.body.classList.remove("glitch");
+  }, 200);
+}, 5000);
 
-// 🌫️ PARTÍCULAS
+// 🌫️ PARTICULAS
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -308,4 +334,3 @@ animate();
 
 </body>
 </html>
-
