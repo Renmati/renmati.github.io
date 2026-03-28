@@ -28,8 +28,23 @@ canvas {
   text-align: center;
 }
 
+<video autoplay loop muted playsinline id="bgVideo">
+  <source src="musica.mp4" type="video/mp4">
+</video>
 /* BOTÓN MÚSICA */
 #musicBtn {
+
+  #bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.3;
+}
+  
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -157,7 +172,7 @@ iframe {
 <button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
 
 <video id="bgVideo" autoplay loop muted playsinline style="display:none;">
-  <source src="musica.mp4" type="video/mp4">
+  <source src=Chubby Mosh - Emblazone Corpse.mp4" type="video/mp4">
 </video>
 <!-- FOTO PERFIL -->
 
@@ -230,18 +245,27 @@ iframe {
 </div>
 
 <script>
-let music = document.getElementById("bgMusic");
+let video = document.getElementById("bgVideo");
 let playing = false;
 
+// 🔥 activar sonido al primer click
+document.addEventListener("click", () => {
+  video.muted = false;
+  video.play();
+  playing = true;
+  document.getElementById("musicBtn").innerText = "🔇 Parar música";
+}, { once: true });
+
 function toggleMusic() {
-  if (!playing) {
-    music.play();
-    playing = true;
-    document.getElementById("musicBtn").innerText = "🔇 Parar música";
-  } else {
-    music.pause();
+  if (playing) {
+    video.pause();
     playing = false;
     document.getElementById("musicBtn").innerText = "🎵 Activar música";
+  } else {
+    video.play();
+    video.muted = false;
+    playing = true;
+    document.getElementById("musicBtn").innerText = "🔇 Parar música";
   }
 }
 
