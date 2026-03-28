@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -7,76 +8,71 @@
 <style>
 body {
   margin: 0;
+  overflow-x: hidden;
   background: black;
   font-family: Arial, sans-serif;
   color: white;
-  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
 }
 
-/* 🎮 HUD */
-.hud {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 35px;
-  background: rgba(0,255,100,0.1);
-  border-bottom: 1px solid #00ff88;
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 15px;
-  font-size: 14px;
-  z-index: 10;
-}
-
-/* 🎬 VIDEO (ARREGLADO) */
+/* 🎬 VIDEO FONDO */
 .video-box {
   position: fixed;
-  right: 15px;
-  bottom: 15px;
-  width: 220px;
-  z-index: 5;
-  overflow: hidden;
+  right: 20px;
+  bottom: 20px;
+  width: 320px;
+  z-index: 2;
 }
 
 .video-box video {
   width: 100%;
   border-radius: 15px;
-  box-shadow: 0 0 15px #00ff88;
-  transform-origin: center;
+  box-shadow: 0 0 20px #00ff88;
 }
 
-/* 🔊 AUDIO */
-#audioBar {
+/* 🌫️ PARTÍCULAS */
+canvas {
   position: fixed;
-  left: 15px;
-  bottom: 15px;
-  width: 150px;
-  height: 8px;
-  background: rgba(0,255,100,0.2);
-}
-#audioLevel {
-  height: 100%;
-  width: 10%;
-  background: #00ff88;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
-/* 🔥 FUEGO */
-.fire {
+/* CONTENIDO */
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* 🎵 BOTÓN */
+#musicBtn {
   position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(transparent, red, orange);
-  opacity: 0.25;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
+.video-box video:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+
+}
 /* PERFIL */
 .profile {
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  margin-top: 60px;
+  object-fit: cover;
+  margin-top: 40px;
   box-shadow: 0 0 25px #00ff88;
+
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
 }
 
 /* TARJETA */
@@ -84,146 +80,228 @@ body {
   background: rgba(20,20,20,0.9);
   padding: 50px;
   border-radius: 25px;
-  width: 520px;
-  margin: auto;
-  text-align: center;
+  display: inline-block;
   box-shadow: 0 0 40px rgba(0,255,100,0.25);
+  width: 520px;
+
+  opacity: 0;
+  animation: fadeInUp 1.5s forwards;
 }
 
+/* ANIMACIONES */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateY(40px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* TEXTO */
 h1 {
   font-size: 75px;
   color: #00ff88;
+  text-shadow: 0 0 25px #00ff88;
 }
 
+p { font-size: 18px; }
+
+.badges img { margin: 8px; }
+
+/* SECCIONES */
 .section {
   margin-top: 80px;
   text-align: center;
+  opacity: 0;
+  animation: fadeInUp 2s forwards;
 }
 
 h2 {
+  font-size: 35px;
   color: #00ff88;
 }
 
-/* 🖱️ REDES CON ANIMACIÓN */
-.social a img {
+.bio {
+  max-width: 700px;
+  margin: auto;
+  font-size: 20px;
+}
+
+/* ICONOS */
+.section a img {
   transition: 0.3s;
 }
 
-.social a:hover img {
-  transform: scale(1.2) rotate(5deg);
+.section a img:hover {
+  transform: scale(1.3);
   filter: drop-shadow(0 0 10px #00ff88);
 }
+
+iframe {
+  margin-top: 20px;
+  border-radius: 15px;
+  width: 80%;
+  height: 400px;
+}
 </style>
+
 </head>
 
 <body>
 
-<!-- 🎮 HUD -->
-<div class="hud">
-  <div>🟢 Sistema activo</div>
-  <div id="time"></div>
-</div>
-
 <!-- 🎬 VIDEO -->
+
 <div class="video-box">
-  <video id="bgVideo" autoplay loop muted controls>
+  <video id="bgVideo" autoplay loop muted playsinline controls>
     <source src="Chubby Mosh - Emblazone Corpse.mp4" type="video/mp4">
   </video>
 </div>
 
-<!-- 🔊 AUDIO -->
-<div id="audioBar"><div id="audioLevel"></div></div>
+<!-- 🌫️ PARTÍCULAS -->
 
-<!-- 🔥 FUEGO -->
-<div class="fire"></div>
+<canvas id="bg"></canvas>
 
-<!-- PERFIL -->
+<!-- 🎵 BOTÓN -->
+
+<button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
+
+<!-- FOTO -->
+
 <div style="text-align:center;">
   <img src="-4otihf.jpg" class="profile">
 </div>
 
-<div class="card">
-  <h1>👋 RENMATI</h1>
-  <p>🎮 Gamer | 💻 Aprendiendo programación</p>
+<div class="container">
+  <div class="card">
+    <h1>👋 RENMATI</h1>
 
-  <div>
-    <img src="https://img.shields.io/badge/YouTube-Comenzando-red?logo=youtube">
-    <img src="https://img.shields.io/badge/Minecraft-Player-green?logo=minecraft">
-    <img src="https://img.shields.io/badge/Futuro-Programador-blue?logo=python">
+
+<p>🎮 Gamer | 💻 Aprendiendo programación</p>
+
+<div class="badges">
+  <img src="https://img.shields.io/badge/YouTube-Comenzando-red?logo=youtube">
+  <img src="https://img.shields.io/badge/Minecraft-Player-green?logo=minecraft">
+  <img src="https://img.shields.io/badge/Futuro-Programador-blue?logo=python">
+</div>
+
+<br>
+
+<img src="https://img.shields.io/badge/Futuro-Dev-black?logo=github">
+
+
   </div>
 </div>
 
-<!-- SOBRE MI -->
 <div class="section">
   <h2>🚀 Sobre mí</h2>
-  <p>
-   Soy Renmati, un creador en proceso que busca convertirse en desarrollador profesional.
+  <p class="bio">
+   Soy Renmati, un creador en proceso que busca forjar su propio camino. Mi
+    objetivo es convertirme en desarrolladora profesional y crecer como creador
+      de contenido, desarrollando proyectos únicos y dejando mi huella..
   </p>
 </div>
 
-<!-- VIDEO YOUTUBE -->
 <div class="section">
   <h2>🔥 El comienzo de algo muy grande</h2>
-  <iframe src="https://www.youtube.com/embed/g9iZH6UcZSM" width="80%" height="400" allowfullscreen></iframe>
 </div>
 
-<!-- REDES -->
 <div class="section">
-  <h2>✨ Conóceme</h2>
+  <iframe src="https://www.youtube.com/embed/g9iZH6UcZSM" allowfullscreen></iframe>
+</div>
 
-  <div class="social" style="display:flex; justify-content:center; gap:25px;">
+<div class="section">
+  <h2>🌐 Conoceme</h2>
+
+  <div style="display:flex; justify-content:center; gap:25px;">
     <a href="https://www.instagram.com/renmati_rp/" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="60">
     </a>
 
-    <a href="https://discord.com/users/1074170673645223936" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
-    </a>
 
-    <a href="https://es.namemc.com/profile/renmati.1" target="_blank">
-      <img src="https://s.namemc.com/img/favicon-30.png" width="60">
-    </a>
+<a href="https://discord.com/users/1074170673645223936" target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
+</a>
+
+<a href="https://es.namemc.com/profile/renmati.1" target="_blank">
+  <img src="https://s.namemc.com/img/favicon-30.png" width="60">
+</a>
+
+
+  </div>
+
+  <div style="margin-top:20px;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg" width="120">
   </div>
 </div>
 
 <script>
-// ⏰ HORA
-setInterval(()=>{
-  document.getElementById("time").innerText = new Date().toLocaleTimeString();
-},1000);
-
-// 🎵 AUDIO REACTIVO (SUAVE)
+// 🎵 FADE MUSIC
 let video = document.getElementById("bgVideo");
-let bar = document.getElementById("audioLevel");
+let volume = 0;
 
-const ctx = new (window.AudioContext || window.webkitAudioContext)();
-const src = ctx.createMediaElementSource(video);
-const analyser = ctx.createAnalyser();
+document.addEventListener("click", () => {
+  video.muted = false;
+  video.volume = 0;
 
-src.connect(analyser);
-analyser.connect(ctx.destination);
+  let fade = setInterval(() => {
+    if (volume < 0.5) {
+      volume += 0.02;
+      video.volume = volume;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}, { once: true });
 
-const data = new Uint8Array(analyser.frequencyBinCount);
-
-function react(){
-  analyser.getByteFrequencyData(data);
-  let avg = data.reduce((a,b)=>a+b)/data.length;
-
-  // ⚠️ ESCALA LIMITADA (NO SE SALE)
-  let scale = 1 + (avg / 2000);
-  video.style.transform = `scale(${scale})`;
-
-  bar.style.width = avg+"%";
-
-  requestAnimationFrame(react);
+function toggleMusic() {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
 }
 
-document.addEventListener("click", ()=>{
-  video.muted=false;
-  ctx.resume();
-  react();
-},{once:true});
-</script>
+// 🌫️ PARTÍCULAS
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
 
-</body>
-</html>
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let particles = [];
+
+for (let i = 0; i < 120; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2,
+    s: Math.random() * 1 + 0.2
+  });
+}
+
+function animate() {
+  ctx.fillStyle = "rgba(0,0,0,0.2)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle = "#00ff88";
+
+  particles.forEach(p => {
+    p.y += p.s;
+    if (p.y > canvas.height) p.y = 0;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
