@@ -6,7 +6,18 @@
 <title>RENMATI.EXE</title>
 
 <style>
-body {.section a img {
+body {
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+  .container {
+  position: relative;
+  z-index: 1;
+
+.section a img {
   transition: 0.3s;
 }
 
@@ -20,17 +31,7 @@ body {.section a img {
   font-family: Arial, sans-serif;
   color: white;
 }
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-  .container {
-  position: relative;
-  z-index: 1;
-}
+  
 
 /* FOTO PERFIL */
 .profile {
