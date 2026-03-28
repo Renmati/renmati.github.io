@@ -25,7 +25,11 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
+}
+  .container {
+  position: relative;
+  z-index: 1;
 }
 
 /* FOTO PERFIL */
@@ -224,7 +228,7 @@ function animate() {
   ctx.fillStyle = "rgba(0,0,0,0.2)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "#00ff88";
+  ctx.fillStyle = "#ff0000";
 
   particles.forEach(p => {
     p.y += p.speedY;
