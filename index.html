@@ -11,6 +11,7 @@ body {
   background: black;
   font-family: Arial, sans-serif;
   color: white;
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
 }
 
 /* 💀 GLITCH */
@@ -52,6 +53,24 @@ body.glitch {
   border-radius: 15px;
   box-shadow: 0 0 20px #00ff88;
   transition: 0.2s;
+}
+
+/* 🔊 BARRA AUDIO */
+#audioBar {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 200px;
+  height: 10px;
+  background: rgba(0,255,100,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#audioLevel {
+  height: 100%;
+  width: 10%;
+  background: #00ff88;
 }
 
 /* 🌫️ PARTICULAS */
@@ -164,6 +183,11 @@ iframe {
   </video>
 </div>
 
+<!-- 🔊 BARRA AUDIO -->
+<div id="audioBar">
+  <div id="audioLevel"></div>
+</div>
+
 <!-- 🌫️ PARTICULAS -->
 <canvas id="bg"></canvas>
 
@@ -230,9 +254,9 @@ iframe {
 </div>
 
 <script>
-// 🎵 AUDIO + REACTIVO
+// 🎵 AUDIO REACTIVO
 let video = document.getElementById("bgVideo");
-let volume = 0;
+let audioLevelBar = document.getElementById("audioLevel");
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const source = audioCtx.createMediaElementSource(video);
@@ -249,8 +273,12 @@ function audioReact() {
 
   let avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
+  // 🎬 escala video
   let scale = 1 + (avg / 200);
   video.style.transform = `scale(${scale})`;
+
+  // 🔊 barra audio
+  audioLevelBar.style.width = avg + "%";
 
   // 💀 glitch con música
   if (avg > 120) {
@@ -263,20 +291,10 @@ function audioReact() {
   requestAnimationFrame(audioReact);
 }
 
+// activar audio
 document.addEventListener("click", () => {
   video.muted = false;
-  video.volume = 0;
   audioCtx.resume();
-
-  let fade = setInterval(() => {
-    if (volume < 0.5) {
-      volume += 0.02;
-      video.volume = volume;
-    } else {
-      clearInterval(fade);
-    }
-  }, 200);
-
   audioReact();
 }, { once: true });
 
