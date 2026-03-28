@@ -14,7 +14,6 @@ body {
   color: white;
 }
 
-/* FONDO */
 canvas {
   position: fixed;
   top: 0;
@@ -22,10 +21,23 @@ canvas {
   z-index: -1;
 }
 
+/* FOTO PERFIL */
+.profile {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 40px;
+  box-shadow: 0 0 25px #00ff88;
+
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: aparecer 1s ease forwards;
+}
+
 /* CONTENEDOR */
 .container {
   text-align: center;
-  margin-top: 80px;
 }
 
 /* TARJETA */
@@ -50,7 +62,7 @@ canvas {
   }
 }
 
-/* NOMBRE GRANDE */
+/* NOMBRE */
 h1 {
   font-size: 65px;
   color: #00ff88;
@@ -110,6 +122,12 @@ iframe {
 
 <canvas id="bg"></canvas>
 
+<!-- FOTO PERFIL ARRIBA -->
+
+<div style="text-align:center;">
+  <img src="perfil.jpg" class="profile">
+</div>
+
 <div class="container">
   <div class="card">
     <h1>👋 RENMATI</h1>
@@ -133,24 +151,18 @@ iframe {
   </div>
 </div>
 
-<!-- BIOGRAFÍA -->
-
 <div class="section">
   <h2>🚀 Sobre mí</h2>
   <p class="bio">
     Soy Renmati, un creador en proceso que busca construir su camino en el mundo digital.
     Mi objetivo es convertirme en un desarrollador profesional y crecer como creador de contenido,
-    creando proyectos únicos, aprendiendo cada día y dejando mi huella.
+    creando proyectos únicos y dejando una huella real en el mundo digital.
   </p>
 </div>
-
-<!-- TÍTULO -->
 
 <div class="section">
   <h2>🔥 El comienzo de algo muy grande</h2>
 </div>
-
-<!-- VIDEO -->
 
 <div class="section">
   <iframe src="https://www.youtube.com/embed/g9iZH6UcZSM" 
