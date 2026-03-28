@@ -15,15 +15,18 @@ body {
 }
 
 /* 🎬 VIDEO FONDO */
-#bgVideo {
+.video-box {
   position: fixed;
-  top: 0;
-  left: 0;
+  right: 20px;
+  bottom: 20px;
+  width: 320px;
+  z-index: 2;
+}
+
+.video-box video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  opacity: 0.3;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #00ff88;
 }
 
 /* 🌫️ PARTÍCULAS */
@@ -144,9 +147,11 @@ iframe {
 
 <!-- 🎬 VIDEO -->
 
-<video id="bgVideo" autoplay loop muted playsinline>
-  <source src="Chubby Mosh - Emblazone Corpse.mp4" type="video/mp4">
-</video>
+<div class="video-box">
+  <video id="bgVideo" autoplay loop muted playsinline controls>
+    <source src="ChubbyMoshEmblazoneCorpse.mp4" type="video/mp4">
+  </video>
+</div>
 
 <!-- 🌫️ PARTÍCULAS -->
 
