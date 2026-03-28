@@ -14,37 +14,35 @@ body {
   color: white;
 }
 
-/* FONDO */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-<video autoplay loop muted playsinline id="bgVideo">
-  <source src="musica.mp4" type="video/mp4">
-</video>
-/* BOTÓN MÚSICA */
-#musicBtn {
-
-  #bgVideo {
+/* 🎬 VIDEO FONDO */
+#bgVideo {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
+  z-index: -2;
   opacity: 0.3;
 }
-  
+
+/* 🌫️ PARTÍCULAS */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* CONTENIDO */
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* 🎵 BOTÓN */
+#musicBtn {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -56,103 +54,82 @@ canvas {
   cursor: pointer;
 }
 
-#musicBtn:hover {
-  background: #00ff88;
-  color: black;
-}
-
-/* FOTO PERFIL */
+/* PERFIL */
 .profile {
-  width: 160px;
-  height: 160px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   object-fit: cover;
   margin-top: 40px;
   box-shadow: 0 0 25px #00ff88;
 
   opacity: 0;
-  transform: translateY(-30px);
-  animation: aparecer 1s ease forwards;
+  animation: fadeIn 1.5s forwards;
 }
 
 /* TARJETA */
 .card {
-  background: rgba(20, 20, 20, 0.9);
+  background: rgba(20,20,20,0.9);
   padding: 50px;
   border-radius: 25px;
   display: inline-block;
   box-shadow: 0 0 40px rgba(0,255,100,0.25);
-  width: 500px;
+  width: 520px;
 
   opacity: 0;
-  transform: translateY(30px);
-  animation: aparecer 1.2s ease forwards;
+  animation: fadeInUp 1.5s forwards;
 }
 
-/* ANIMACIÓN */
-@keyframes aparecer {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ANIMACIONES */
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 
-/* NOMBRE */
-h1 {
-  font-size: 70px;
-  color: #00ff88;
-  text-shadow: 0 0 20px #00ff88;
-  margin-bottom: 15px;
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateY(40px); }
+  to { opacity:1; transform: translateY(0); }
 }
 
 /* TEXTO */
-p {
-  font-size: 18px;
-  opacity: 0.85;
+h1 {
+  font-size: 75px;
+  color: #00ff88;
+  text-shadow: 0 0 25px #00ff88;
 }
 
-/* BADGES */
-.badges img {
-  margin: 8px;
-  transform: scale(1.1);
-}
+p { font-size: 18px; }
+
+.badges img { margin: 8px; }
 
 /* SECCIONES */
 .section {
   margin-top: 80px;
   text-align: center;
-
   opacity: 0;
-  transform: translateY(30px);
-  animation: aparecer 1.5s ease forwards;
+  animation: fadeInUp 2s forwards;
 }
 
-/* ICONOS HOVER */
+h2 {
+  font-size: 35px;
+  color: #00ff88;
+}
+
+.bio {
+  max-width: 700px;
+  margin: auto;
+  font-size: 20px;
+}
+
+/* ICONOS */
 .section a img {
   transition: 0.3s;
 }
 
 .section a img:hover {
-  transform: scale(1.25);
+  transform: scale(1.3);
   filter: drop-shadow(0 0 10px #00ff88);
 }
 
-/* TITULOS */
-h2 {
-  font-size: 35px;
-  color: #00ff88;
-  text-shadow: 0 0 10px #00ff88;
-}
-
-/* BIO */
-.bio {
-  max-width: 700px;
-  margin: auto;
-  font-size: 20px;
-  opacity: 0.9;
-}
-
-/* VIDEO */
 iframe {
   margin-top: 20px;
   border-radius: 15px;
@@ -165,21 +142,26 @@ iframe {
 
 <body>
 
+<!-- 🎬 VIDEO -->
+
+<video id="bgVideo" autoplay loop muted playsinline>
+  <source src="musica.mp4" type="video/mp4">
+</video>
+
+<!-- 🌫️ PARTÍCULAS -->
+
 <canvas id="bg"></canvas>
 
-<!-- 🎵 MÚSICA -->
+<!-- 🎵 BOTÓN -->
 
 <button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
 
-<video id="bgVideo" autoplay loop muted playsinline style="display:none;">
-  <source src=Chubby Mosh - Emblazone Corpse.mp4" type="video/mp4">
-</video>
-<!-- FOTO PERFIL -->
+<!-- FOTO -->
 
-<div style="text-align: center;">
+<div style="text-align:center;">
   <img src="-4otihf.jpg" class="profile">
 </div>
-  
+
 <div class="container">
   <div class="card">
     <h1>👋 RENMATI</h1>
@@ -190,7 +172,7 @@ iframe {
 <div class="badges">
   <img src="https://img.shields.io/badge/YouTube-Comenzando-red?logo=youtube">
   <img src="https://img.shields.io/badge/Minecraft-Player-green?logo=minecraft">
-  <img src="https://img.shields.io/badge/Futuro-Programador%20Profesional-blue?logo=python">
+  <img src="https://img.shields.io/badge/Futuro-Programador-blue?logo=python">
 </div>
 
 <br>
@@ -204,9 +186,9 @@ iframe {
 <div class="section">
   <h2>🚀 Sobre mí</h2>
   <p class="bio">
-    Soy Renmati, un creador en proceso que busca construir su camino.
-    Mi objetivo es convertirme en un desarrollador profesional y crecer como creador de contenido,
-    creando proyectos únicos y dejando mi huella.
+   Soy Renmati, un creador en proceso que busca forjar su propio camino. Mi
+    objetivo es convertirme en desarrolladora profesional y crecer como creador
+      de contenido, desarrollando proyectos únicos y dejando mi huella..
   </p>
 </div>
 
@@ -221,13 +203,12 @@ iframe {
 <div class="section">
   <h2>🌐 Conoceme</h2>
 
-  <div style="display: flex; justify-content: center; gap: 25px;">
+  <div style="display:flex; justify-content:center; gap:25px;">
+    <a href="https://www.instagram.com/renmati_rp/" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="60">
+    </a>
 
 ```
-<a href="https://www.instagram.com/renmati_rp/" target="_blank">
-  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="60">
-</a>
-
 <a href="https://discord.com/users/1074170673645223936" target="_blank">
   <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
 </a>
@@ -239,37 +220,39 @@ iframe {
 
   </div>
 
-  <div style="margin-top: 20px;">
+  <div style="margin-top:20px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg" width="120">
   </div>
 </div>
 
 <script>
+// 🎵 FADE MUSIC
 let video = document.getElementById("bgVideo");
-let playing = false;
+let volume = 0;
 
-// 🔥 activar sonido al primer click
 document.addEventListener("click", () => {
   video.muted = false;
-  video.play();
-  playing = true;
-  document.getElementById("musicBtn").innerText = "🔇 Parar música";
+  video.volume = 0;
+
+  let fade = setInterval(() => {
+    if (volume < 0.5) {
+      volume += 0.02;
+      video.volume = volume;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
 }, { once: true });
 
 function toggleMusic() {
-  if (playing) {
-    video.pause();
-    playing = false;
-    document.getElementById("musicBtn").innerText = "🎵 Activar música";
-  } else {
+  if (video.paused) {
     video.play();
-    video.muted = false;
-    playing = true;
-    document.getElementById("musicBtn").innerText = "🔇 Parar música";
+  } else {
+    video.pause();
   }
 }
 
-// FONDO ANIMADO
+// 🌫️ PARTÍCULAS
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -287,27 +270,23 @@ for (let i = 0; i < 120; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    radius: Math.random() * 2,
-    speedY: Math.random() * 1 + 0.2
+    r: Math.random() * 2,
+    s: Math.random() * 1 + 0.2
   });
 }
 
 function animate() {
   ctx.fillStyle = "rgba(0,0,0,0.2)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  ctx.fillStyle = "#00ff88"; // VERDE
+  ctx.fillStyle = "#00ff88";
 
   particles.forEach(p => {
-    p.y += p.speedY;
-
-    if (p.y > canvas.height) {
-      p.y = 0;
-      p.x = Math.random() * canvas.width;
-    }
+    p.y += p.s;
+    if (p.y > canvas.height) p.y = 0;
 
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
     ctx.fill();
   });
 
@@ -320,7 +299,3 @@ animate();
 </body>
 </html>
 
-animate();
-
-
-  
