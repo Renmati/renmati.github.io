@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 
+<button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
+
+<audio id="bgMusic" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -30,6 +36,22 @@ canvas {
   .container {
   position: relative;
   z-index: 1;
+}
+  #musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#musicBtn:hover {
+  background: #00ff88;
+  color: black;
 }
 
 
@@ -208,6 +230,21 @@ iframe {
 </div>
   
 <script>
+let music = document.getElementById("bgMusic");
+let playing = false;
+
+function toggleMusic() {
+  if (!playing) {
+    music.play();
+    playing = true;
+    document.getElementById("musicBtn").innerText = "🔇 Parar música";
+  } else {
+    music.pause();
+    playing = false;
+    document.getElementById("musicBtn").innerText = "🎵 Activar música";
+  }
+}
+  
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
