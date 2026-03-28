@@ -1,1 +1,307 @@
-# renmati.github.io
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>RENMATI.EXE</title>
+
+<style>
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: black;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* 🎬 VIDEO FONDO */
+.video-box {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 320px;
+  z-index: 2;
+}
+
+.video-box video {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #00ff88;
+}
+
+/* 🌫️ PARTÍCULAS */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* CONTENIDO */
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* 🎵 BOTÓN */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.video-box video:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+
+}
+/* PERFIL */
+.profile {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 40px;
+  box-shadow: 0 0 25px #00ff88;
+
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+/* TARJETA */
+.card {
+  background: rgba(20,20,20,0.9);
+  padding: 50px;
+  border-radius: 25px;
+  display: inline-block;
+  box-shadow: 0 0 40px rgba(0,255,100,0.25);
+  width: 520px;
+
+  opacity: 0;
+  animation: fadeInUp 1.5s forwards;
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateY(40px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* TEXTO */
+h1 {
+  font-size: 75px;
+  color: #00ff88;
+  text-shadow: 0 0 25px #00ff88;
+}
+
+p { font-size: 18px; }
+
+.badges img { margin: 8px; }
+
+/* SECCIONES */
+.section {
+  margin-top: 80px;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 2s forwards;
+}
+
+h2 {
+  font-size: 35px;
+  color: #00ff88;
+}
+
+.bio {
+  max-width: 700px;
+  margin: auto;
+  font-size: 20px;
+}
+
+/* ICONOS */
+.section a img {
+  transition: 0.3s;
+}
+
+.section a img:hover {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 10px #00ff88);
+}
+
+iframe {
+  margin-top: 20px;
+  border-radius: 15px;
+  width: 80%;
+  height: 400px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 🎬 VIDEO -->
+
+<div class="video-box">
+  <video id="bgVideo" autoplay loop muted playsinline controls>
+    <source src="Chubby Mosh - Emblazone Corpse.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- 🌫️ PARTÍCULAS -->
+
+<canvas id="bg"></canvas>
+
+<!-- 🎵 BOTÓN -->
+
+<button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
+
+<!-- FOTO -->
+
+<div style="text-align:center;">
+  <img src="-4otihf.jpg" class="profile">
+</div>
+
+<div class="container">
+  <div class="card">
+    <h1>👋 RENMATI</h1>
+
+
+<p>🎮 Gamer | 💻 Aprendiendo programación</p>
+
+<div class="badges">
+  <img src="https://img.shields.io/badge/YouTube-Comenzando-red?logo=youtube">
+  <img src="https://img.shields.io/badge/Minecraft-Player-green?logo=minecraft">
+  <img src="https://img.shields.io/badge/Futuro-Programador-blue?logo=python">
+</div>
+
+<br>
+
+<img src="https://img.shields.io/badge/Futuro-Dev-black?logo=github">
+
+
+  </div>
+</div>
+
+<div class="section">
+  <h2>🚀 Sobre mí</h2>
+  <p class="bio">
+   Soy Renmati, un creador en proceso que busca forjar su propio camino. Mi
+    objetivo es convertirme en desarrolladora profesional y crecer como creador
+      de contenido, desarrollando proyectos únicos y dejando mi huella..
+  </p>
+</div>
+
+<div class="section">
+  <h2>🔥 El comienzo de algo muy grande</h2>
+</div>
+
+<div class="section">
+  <iframe src="https://www.youtube.com/embed/g9iZH6UcZSM" allowfullscreen></iframe>
+</div>
+
+<div class="section">
+  <h2>🌐 Conoceme</h2>
+
+  <div style="display:flex; justify-content:center; gap:25px;">
+    <a href="https://www.instagram.com/renmati_rp/" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="60">
+    </a>
+
+
+<a href="https://discord.com/users/1074170673645223936" target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
+</a>
+
+<a href="https://es.namemc.com/profile/renmati.1" target="_blank">
+  <img src="https://s.namemc.com/img/favicon-30.png" width="60">
+</a>
+
+
+  </div>
+
+  <div style="margin-top:20px;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg" width="120">
+  </div>
+</div>
+
+<script>
+// 🎵 FADE MUSIC
+let video = document.getElementById("bgVideo");
+let volume = 0;
+
+document.addEventListener("click", () => {
+  video.muted = false;
+  video.volume = 0;
+
+  let fade = setInterval(() => {
+    if (volume < 0.5) {
+      volume += 0.02;
+      video.volume = volume;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}, { once: true });
+
+function toggleMusic() {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
+}
+
+// 🌫️ PARTÍCULAS
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let particles = [];
+
+for (let i = 0; i < 120; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2,
+    s: Math.random() * 1 + 0.2
+  });
+}
+
+function animate() {
+  ctx.fillStyle = "rgba(0,0,0,0.2)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle = "#00ff88";
+
+  particles.forEach(p => {
+    p.y += p.s;
+    if (p.y > canvas.height) p.y = 0;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
