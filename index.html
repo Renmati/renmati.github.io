@@ -8,12 +8,13 @@
 <style>
 body {
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   background: black;
   font-family: Arial, sans-serif;
   color: white;
 }
 
+/* FONDO */
 canvas {
   position: fixed;
   top: 0;
@@ -21,45 +22,85 @@ canvas {
   z-index: -1;
 }
 
+/* CONTENEDOR */
 .container {
-  position: relative;
   text-align: center;
   margin-top: 80px;
 }
 
-/* CUADRO MÁS GRANDE */
+/* TARJETA */
 .card {
-  background: rgba(20, 20, 20, 0.85);
-  padding: 40px;
-  border-radius: 20px;
+  background: rgba(20, 20, 20, 0.9);
+  padding: 50px;
+  border-radius: 25px;
   display: inline-block;
-  box-shadow: 0 0 35px rgba(0,255,100,0.25);
-  width: 350px;
+  box-shadow: 0 0 40px rgba(0,255,100,0.25);
+  width: 500px;
+
+  opacity: 0;
+  transform: translateY(30px);
+  animation: aparecer 1.2s ease forwards;
 }
 
-/* EFECTO HOVER */
-.card:hover {
-  transform: scale(1.05);
-  transition: 0.3s;
+/* ANIMACIÓN */
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* NOMBRE MÁS GRANDE */
+/* NOMBRE GRANDE */
 h1 {
-  font-size: 45px;
+  font-size: 65px;
   color: #00ff88;
-  text-shadow: 0 0 15px #00ff88;
-  margin-bottom: 10px;
+  text-shadow: 0 0 20px #00ff88;
+  margin-bottom: 15px;
 }
 
 /* TEXTO */
 p {
-  font-size: 16px;
-  opacity: 0.8;
+  font-size: 18px;
+  opacity: 0.85;
 }
 
-/* ESPACIADO BADGES */
+/* BADGES */
 .badges img {
-  margin: 5px;
+  margin: 8px;
+  transform: scale(1.1);
+}
+
+/* SECCIONES */
+.section {
+  margin-top: 80px;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(30px);
+  animation: aparecer 1.5s ease forwards;
+}
+
+/* TITULOS */
+h2 {
+  font-size: 35px;
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+/* BIO */
+.bio {
+  max-width: 700px;
+  margin: auto;
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+/* VIDEO */
+iframe {
+  margin-top: 20px;
+  border-radius: 15px;
+  width: 80%;
+  height: 400px;
 }
 </style>
 
@@ -90,6 +131,31 @@ p {
 ```
 
   </div>
+</div>
+
+<!-- BIOGRAFÍA -->
+
+<div class="section">
+  <h2>🚀 Sobre mí</h2>
+  <p class="bio">
+    Soy Renmati, un creador en proceso que busca construir su camino en el mundo digital.
+    Mi objetivo es convertirme en un desarrollador profesional y crecer como creador de contenido,
+    creando proyectos únicos, aprendiendo cada día y dejando mi huella en internet.
+  </p>
+</div>
+
+<!-- TÍTULO -->
+
+<div class="section">
+  <h2>🔥 El comienzo de algo muy grande</h2>
+</div>
+
+<!-- VIDEO -->
+
+<div class="section">
+  <iframe src="https://www.youtube.com/embed/g9iZH6UcZSM" 
+  frameborder="0" 
+  allowfullscreen></iframe>
 </div>
 
 <script>
