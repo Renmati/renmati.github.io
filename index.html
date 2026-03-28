@@ -1,50 +1,35 @@
 <!DOCTYPE html>
 
-<button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
-
-<audio id="bgMusic" loop>
-  <source src="ChubbyMoshEmblazoneCorpse.mp3" type="audio/mpeg">
-</audio>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>RENMATI.EXE</title>
 
 <style>
-body {.section a img {
-  transition: 0.3s;
-}
-
-.section a img:hover {
-  transform: scale(1.25);
-  filter: drop-shadow(0 0 10px #00ff88);
-}
+body {
   margin: 0;
   overflow-x: hidden;
   background: black;
   font-family: Arial, sans-serif;
   color: white;
 }
-  
+
+/* FONDO */
 canvas {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 0;
 }
-  .container {
+
+.container {
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
-<button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
-
-<audio id="bgMusic" loop>
-  <source src="ChubbyMoshEmblazoneCorpse.mp3" type="audio/mpeg">
-</audio>
-  
-  #musicBtn {
+/* BOTÓN MÚSICA */
+#musicBtn {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -61,7 +46,6 @@ canvas {
   color: black;
 }
 
-
 /* FOTO PERFIL */
 .profile {
   width: 160px;
@@ -74,11 +58,6 @@ canvas {
   opacity: 0;
   transform: translateY(-30px);
   animation: aparecer 1s ease forwards;
-}
-
-/* CONTENEDOR */
-.container {
-  text-align: center;
 }
 
 /* TARJETA */
@@ -105,7 +84,7 @@ canvas {
 
 /* NOMBRE */
 h1 {
-  font-size: 65px;
+  font-size: 70px;
   color: #00ff88;
   text-shadow: 0 0 20px #00ff88;
   margin-bottom: 15px;
@@ -131,6 +110,16 @@ p {
   opacity: 0;
   transform: translateY(30px);
   animation: aparecer 1.5s ease forwards;
+}
+
+/* ICONOS HOVER */
+.section a img {
+  transition: 0.3s;
+}
+
+.section a img:hover {
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 10px #00ff88);
 }
 
 /* TITULOS */
@@ -163,9 +152,17 @@ iframe {
 
 <canvas id="bg"></canvas>
 
-<!-- FOTO PERFIL ARRIBA -->
+<!-- 🎵 MÚSICA -->
 
-<div style="text-align:center;">
+<button onclick="toggleMusic()" id="musicBtn">🎵 Activar música</button>
+
+<audio id="bgMusic" loop>
+  <source src="ChubbyMoshEmblazoneCorpse.mp3" type="audio/mpeg">
+</audio>
+
+<!-- FOTO PERFIL -->
+
+<div>
   <img src="-4otihf.jpg" class="profile">
 </div>
 
@@ -175,8 +172,6 @@ iframe {
 
 ```
 <p>🎮 Gamer | 💻 Aprendiendo programación</p>
-
-<br>
 
 <div class="badges">
   <img src="https://img.shields.io/badge/YouTube-Comenzando-red?logo=youtube">
@@ -206,36 +201,35 @@ iframe {
 </div>
 
 <div class="section">
-  <iframe src="https://www.youtube.com/embed/g9iZH6UcZSM" 
-  frameborder="0" 
-  allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/g9iZH6UcZSM" allowfullscreen></iframe>
 </div>
 
-  <div class="section">
+<div class="section">
   <h2>🌐 Conoceme</h2>
 
   <div style="display: flex; justify-content: center; gap: 25px;">
 
-    <a href="https://www.instagram.com/renmati_rp/" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="60">
-    </a>
+```
+<a href="https://www.instagram.com/renmati_rp/" target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="60">
+</a>
 
-    <a href="https://discord.com/users/1074170673645223936" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
-    </a>
+<a href="https://discord.com/users/1074170673645223936" target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="60">
+</a>
 
-    <a href="https://es.namemc.com/profile/renmati.1" target="_blank">
-      <img src="https://s.namemc.com/img/favicon-30.png" width="60">
-    </a>
+<a href="https://es.namemc.com/profile/renmati.1" target="_blank">
+  <img src="https://s.namemc.com/img/favicon-30.png" width="60">
+</a>
+```
 
   </div>
 
   <div style="margin-top: 20px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg" width="120">
   </div>
-
 </div>
-  
+
 <script>
 let music = document.getElementById("bgMusic");
 let playing = false;
@@ -251,7 +245,8 @@ function toggleMusic() {
     document.getElementById("musicBtn").innerText = "🎵 Activar música";
   }
 }
-  
+
+// FONDO ANIMADO
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -278,7 +273,7 @@ function animate() {
   ctx.fillStyle = "rgba(0,0,0,0.2)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "#ff0000";
+  ctx.fillStyle = "#00ff88"; // VERDE
 
   particles.forEach(p => {
     p.y += p.speedY;
@@ -295,6 +290,12 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
+
+animate();
+</script>
+
+</body>
+</html>
 
 animate();
 
